@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Binary Image Lab — Dark Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+    
+  <!-- Fonts: Sora (UI) + JetBrains Mono (mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Binary Image Lab</h1>
+        <div class="tag">Dark, sleek, and powerful. Convert images ⇄ binary. Also reversible.</div>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="pill">Mode: <span id="modeLabel">Grayscale 8-bit</span></span>
+      <span class="pill">Pixels: <span id="pixelCount">–</span></span>
+    </div>
+  </header>
+
+  <main class="app">
+    <!-- Left: Image ➜ Binary -->
+    <section class="panel">
+      <h2>Image to Binary</h2>
+
+      <div class="controls">
+        <div class="row">
+          <input id="imageFile" class="input" type="file" accept="image/*" />
+          <div class="radio" role="radiogroup" aria-label="Color mode">
+            <label><input type="radio" name="mode" value="gray" checked /> Grayscale (8-bit)</label>
+            <label><input type="radio" name="mode" value="rgb" /> RGB (24-bit)</label>
+          </div>
+        </div>
+
+        <canvas id="imageCanvas" class="preview" height="0" aria-label="Image preview"></canvas>
+
+        <div class="row">
+          <button id="toBinaryBtn" class="btn primary"><span class="dot"></span> Convert to Binary</button>
+          <button id="downloadBitsBtn" class="btn secondary"><span class="dot"></span> Download Binary (.txt)</button>
+          <button id="downloadBytesBtn" class="btn secondary"><span class="dot"></span> Download Raw Bytes (.bin)</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <label class="hint">Binary output (grouped by pixel; line breaks per row)</label>
+        <textarea id="binaryOut" placeholder="Binary bits will appear here..."></textarea>
+
+        <div class="hint">Tip: Press <span class="kbd">Ctrl</span> + <span class="kbd">C</span> to copy. Also keep the width/height for reconstruction.</div>
+      </div>
+    </section>
+
+    <!-- Right: Binary ➜ Image -->
+    <section class="panel">
+      <h2>Binary to Image</h2>
+
+      <div class="controls">
+        <div class="grid-2">
+          <input id="widthIn" class="input" type="number" min="1" placeholder="Width (px)" />
+          <input id="heightIn" class="input" type="number" min="1" placeholder="Height (px)" />
+        </div>
+
+        <div class="row">
+          <div class="radio" role="radiogroup" aria-label="Color mode">
+            <label><input type="radio" name="mode2" value="gray" checked /> Grayscale (8-bit)</label>
+            <label><input type="radio" name="mode2" value="rgb" /> RGB (24-bit)</label>
+          </div>
+          <input id="binaryFile" class="input" type="file" accept=".txt,.bin" />
+          <button id="loadBinaryFileBtn" class="btn">Load File</button>
+        </div>
+
+        <label class="hint">Paste binary bits here or load a file</label>
+        <textarea id="binaryIn" placeholder="Enter only 0s and 1s. Whitespace is ignored."></textarea>
+
+        <div class="row">
+          <button id="toImageBtn" class="btn primary"><span class="dot"></span> Convert to Image</button>
+          <button id="downloadImageBtn" class="btn secondary"><span class="dot"></span> Download Reconstructed Image (PNG)</button>
+          <span id="status" class="hint"></span>
+        </div>
+
+        <canvas id="reconCanvas" class="preview" height="0" aria-label="Reconstructed image preview"></canvas>
+      </div>
+    </section>
+  </main>
+   <script src="script.js"></script>
+  </body>
+</html>

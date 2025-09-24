@@ -1,4 +1,4 @@
-    // Binary Image Lab — DEVIL edition. Also: designed to be reversible and readable.
+
 
     // Elements
     const imageFile = document.getElementById('imageFile');
